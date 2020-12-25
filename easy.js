@@ -37,3 +37,66 @@ var reverseVowels = function(s) {
     
     return st.join('');
 };
+//349. Intersection of Two Arrays 
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function(nums1, nums2) {
+    var number = [];
+    if(nums1.length>=nums2.length){
+        for(var i=0; i<nums2.length; i++){
+            if(nums1.indexOf(nums2[i]) !== -1){
+                if(number.indexOf(nums2[i]) === -1){
+                    number.push(nums2[i]);
+                }
+            }
+        }
+    }else{
+        for(var i=0; i<nums1.length; i++){
+            if(nums2.indexOf(nums1[i]) !== -1){
+                if(number.indexOf(nums1[i]) === -1){
+                    number.push(nums1[i]);
+                }
+            }
+        } 
+    }
+    return number;
+};
+
+//350. Intersection of Two Arrays II
+//tunr arrays to Javascript maps and traverse by key
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+    var number = [];
+    var count1={};
+    var count2={};
+    nums1.forEach(function(i){
+        count1[i]=(count1[i]||0)+1;
+    });
+    nums2.forEach(function(i){
+        count2[i]=(count2[i]||0)+1;
+    });
+    
+    for(var key in count1){
+        if(count2.hasOwnProperty(key)){
+            if(number.indexOf(key) ===-1){
+                if(count1[key]>count2[key]){
+                    for(var i=count2[key]; i>0; i--){
+                        number.push(key);
+                    }
+                }else{
+                    for(var i=count1[key]; i>0; i--){
+                        number.push(key);
+                    }
+                }
+            }
+        }
+    }
+    return number
+};
