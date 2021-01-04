@@ -100,3 +100,107 @@ var intersect = function(nums1, nums2) {
     }
     return number
 };
+
+/* LINKED LIST PROBLEMS
+*****************************/
+
+//21. Merge Two Sorted Lists
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  
+    let l = new ListNode();
+    let head = l;
+    
+    while(true){
+    if(l1 == null){
+        l.next=l2;
+        break;
+    }else if(l2 == null){
+        l.next=l1
+        break;
+    }else{
+        if(l1.val<=l2.val){
+            l.next = new ListNode(l1.val, null);
+            l = l.next;
+            l1 = l1.next;
+        }else{
+            l.next = new ListNode(l2.val, null);
+            l = l.next;
+            l2 = l2.next;
+        }
+    }
+    }
+    return head.next;
+};
+
+//206. Reverse Linked List
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    
+    if(head == null){
+        return head;
+    }
+    let prev = head;
+    let cur = head;
+    let next = head.next;
+    head.next = null;
+    
+    while(next != null){
+    cur = next;
+    next = next.next;
+    cur.next = prev;
+    head = cur;
+    prev = head;  
+    }
+    
+    return head;
+};
+
+//104. Maximum Depth of Binary Tree
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    if(root==null){
+        return 0;
+    }
+    
+    var maxRight = maxDepth(root.right);
+    var maxLeft = maxDepth(root.left);
+    
+    if(maxRight > maxLeft){
+        return(maxRight+1);
+    }else{
+        return(maxLeft+1);
+    }
+};
